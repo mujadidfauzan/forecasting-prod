@@ -247,7 +247,7 @@ def forecast(server: str, metric: str):
     except ValueError as e:
         return {"error": str(e)}
 
-    return {"server": server, "metric": metric, "forecast": forecast_val}
+    return {"server": server, "metric": metric, "forecast": 100 - forecast_val}
 
 
 @app.get("/all_forecast")
@@ -309,7 +309,7 @@ def all_forecast(metric: str):
     else:
         average_val = "No valid forecasts"
 
-    results["average"] = average_val
+    results["average"] = 100 - average_val
     return results
 
     """
