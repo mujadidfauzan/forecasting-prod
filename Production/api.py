@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import time
 
 import joblib
@@ -24,56 +25,60 @@ def loss_fn(y_true, y_pred):
 # 1) Load All Models & Scalers
 # -------------------------
 
-base_path = "/home/fauzan/forecasting-infrastructure-git/Production"
+# Get the directory where this api.py file is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # APM
 model_bilstm_cpu_APM = tf.keras.models.load_model(
-    f"{base_path}/APM/CPU/my_model-bilstm-window_12.keras"
+    os.path.join(BASE_DIR, "APM", "CPU", "my_model-bilstm-window_12.keras")
 )
-scaler_cpu_APM = joblib.load(f"{base_path}/APM/CPU/scaler-cpu.pkl")
+scaler_cpu_APM = joblib.load(os.path.join(BASE_DIR, "APM", "CPU", "scaler-cpu.pkl"))
 
 model_bilstm_mem_APM = tf.keras.models.load_model(
-    f"{base_path}/APM/Memory/my_model-gru-window_12.keras"
+    os.path.join(BASE_DIR, "APM", "Memory", "my_model-gru-window_12.keras")
 )
-scaler_mem_APM = joblib.load(f"{base_path}/APM/Memory/scaler-memo.pkl")
+scaler_mem_APM = joblib.load(os.path.join(BASE_DIR, "APM", "Memory", "scaler-memo.pkl"))
 
 model_bilstm_disk_APM = tf.keras.models.load_model(
-    f"{base_path}/APM/Disk/my_model-gru-window_12.keras"
+    os.path.join(BASE_DIR, "APM", "Disk", "my_model-gru-window_12.keras")
 )
-scaler_disk_APM = joblib.load(f"{base_path}/APM/Disk/scaler.pkl")
+scaler_disk_APM = joblib.load(os.path.join(BASE_DIR, "APM", "Disk", "scaler.pkl"))
 
 # SIEM
 model_bilstm_cpu_SIEM = tf.keras.models.load_model(
-    f"{base_path}/SIEM/CPU/my_model-bilstm-window_12.keras"
+    os.path.join(BASE_DIR, "SIEM", "CPU", "my_model-bilstm-window_12.keras")
 )
-scaler_cpu_SIEM = joblib.load(f"{base_path}/SIEM/CPU/scaler-cpu.pkl")
+scaler_cpu_SIEM = joblib.load(os.path.join(BASE_DIR, "SIEM", "CPU", "scaler-cpu.pkl"))
 
 model_bilstm_mem_SIEM = tf.keras.models.load_model(
-    f"{base_path}/SIEM/Memory/my_model-bilstm-window_4.keras"
+    os.path.join(BASE_DIR, "SIEM", "Memory", "my_model-bilstm-window_4.keras")
 )
-scaler_mem_SIEM = joblib.load(f"{base_path}/SIEM/Memory/scaler-memo.pkl")
+scaler_mem_SIEM = joblib.load(
+    os.path.join(BASE_DIR, "SIEM", "Memory", "scaler-memo.pkl")
+)
 
 model_bilstm_disk_SIEM = tf.keras.models.load_model(
-    f"{base_path}/SIEM/Disk/my_model-bilstm-window_12.keras"
+    os.path.join(BASE_DIR, "SIEM", "Disk", "my_model-bilstm-window_12.keras")
 )
-scaler_disk_SIEM = joblib.load(f"{base_path}/SIEM/Disk/scaler.pkl")
+scaler_disk_SIEM = joblib.load(os.path.join(BASE_DIR, "SIEM", "Disk", "scaler.pkl"))
 
-# KT
+# KT (KejarTugas)
 model_bilstm_cpu_KT = tf.keras.models.load_model(
-    f"{base_path}/KejarTugas/CPU/my_model-gru-window_12.keras"
+    os.path.join(BASE_DIR, "KejarTugas", "CPU", "my_model-gru-window_12.keras")
 )
-scaler_cpu_KT = joblib.load(f"{base_path}/KejarTugas/CPU/scaler.pkl")
+scaler_cpu_KT = joblib.load(os.path.join(BASE_DIR, "KejarTugas", "CPU", "scaler.pkl"))
 
 model_bilstm_mem_KT = tf.keras.models.load_model(
-    f"{base_path}/KejarTugas/Memory/my_model-gru-window_12.keras"
+    os.path.join(BASE_DIR, "KejarTugas", "Memory", "my_model-gru-window_12.keras")
 )
-scaler_mem_KT = joblib.load(f"{base_path}/KejarTugas/Memory/scaler.pkl")
+scaler_mem_KT = joblib.load(
+    os.path.join(BASE_DIR, "KejarTugas", "Memory", "scaler.pkl")
+)
 
 model_bilstm_disk_KT = tf.keras.models.load_model(
-    f"{base_path}/KejarTugas/Disk/my_model-gru-window_12.keras"
+    os.path.join(BASE_DIR, "KejarTugas", "Disk", "my_model-gru-window_12.keras")
 )
-scaler_disk_KT = joblib.load(f"{base_path}/KejarTugas/Disk/scaler.pkl")
-
+scaler_disk_KT = joblib.load(os.path.join(BASE_DIR, "KejarTugas", "Disk", "scaler.pkl"))
 
 # -------------------------
 # 2) Configuration Dictionaries
